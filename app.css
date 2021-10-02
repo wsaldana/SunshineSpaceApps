@@ -1,0 +1,16 @@
+.container-drawer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container-drawer .parameters-drawer {
+  width: inherit;
+  margin: 5px 0;
+  padding: 8px 0px;
+  border-bottom: solid black 3px;
+}
+
+.container-drawer .parameters-drawer .title-drawer {
+  width: 100%;
+}
