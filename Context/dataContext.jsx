@@ -4,10 +4,10 @@ const DataContext = React.createContext()
 
 const ProviderDataContext = ({ children }) => {
   const [data, setData] = useState({
-    latitude: 10,
-    longitude: 10,
-    start: 2000,
-    end: 2010,
+    latitude: null,
+    longitude: null,
+    start: null,
+    end: null,
   })
   return (
     <DataContext.Provider value={{
