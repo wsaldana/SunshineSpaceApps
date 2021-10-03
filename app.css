@@ -1,16 +1,23 @@
 .container-drawer {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
 .container-drawer .parameters-drawer {
-  width: inherit;
-  margin: 5px 0;
+  width: 90%;
+  margin: 5vh 3vw;
   padding: 8px 0px;
   border-bottom: solid black 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.container-drawer .parameters-drawer .title-drawer {
-  width: 100%;
+.whole-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
+
