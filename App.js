@@ -1,5 +1,4 @@
-import { StatusBar } from 'expo-status-bar';
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState } from 'react';
 import { Button, StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native'
 import './app.css'
@@ -7,21 +6,25 @@ import {
   createDrawerNavigator,
   DrawerContentScrollView,
   DrawerItemList,
-  DrawerItem,
 } from '@react-navigation/drawer';
 import { TextInput } from 'react-native-gesture-handler';
 import { DataContext, ProviderDataContext } from './Context/dataContext';
+import useApi from './hooks/useApi';
 
 function Feed() {
+  const { data } = useContext(DataContext);
+  const apiData = useApi(data);
+
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>UVGSunshine</Text>
+      <Text>a</Text>
+      <Button title="Learn More"></Button>
     </View>
-  )
-}
+  );
+};
 
 function CustomDrawerContent(props) {
-  const {data, setData} = useContext(DataContext)
+  const {data, setData} = useContext(DataContext);
   const [geoLoc, setGeoloc] = useState({
     ready: false,
     where: {
@@ -29,23 +32,22 @@ function CustomDrawerContent(props) {
       longitude: null,
     },
     err: null,
-  })
+  });
 
   const geoSuccess = (position) => {
-    
     setGeoloc({
       ready:true,
       where: {lat: position.coords.latitude,lng:position.coords.longitude }
-    })
+    });
     setData({
       ...data,
       latitude: position.coords.latitude,
       longitude: position.coords.longitude,
-    })
+    });
   }
   const geoFailure = (err) => {
-      setGeoloc({error: err.message});
-  }
+    setGeoloc({error: err.message});
+  };
 
   return (
     <DrawerContentScrollView {...props}>
@@ -109,17 +111,9 @@ function CustomDrawerContent(props) {
           />
         </View>
       </View>
-      {/* <DrawerItem
-        label="Close drawer"
-        onPress={() => props.navigation.closeDrawer()}
-      />
-      <DrawerItem
-        label="Toggle drawer"
-        onPress={() => props.navigation.toggleDrawer()}
-      /> */}
     </DrawerContentScrollView>
   );
-}
+};
 
 const Drawer = createDrawerNavigator();
 
@@ -131,7 +125,8 @@ function MyDrawer() {
       <Drawer.Screen name="UVGSunshine" component={Feed} />
     </Drawer.Navigator>
   );
-}
+};
+
 export default function App() {
   return (
     <ProviderDataContext>
@@ -139,12 +134,8 @@ export default function App() {
         <MyDrawer />
       </NavigationContainer>
     </ProviderDataContext>
-    // <View style={styles.container}>
-    //   <Text>Open up App.js to start working on your Heo!</Text>
-    //   <StatusBar style="auto" />
-    // </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -184,6 +175,5 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-  }
-
+  },
 });
