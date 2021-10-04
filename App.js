@@ -101,6 +101,16 @@ function CustomDrawerContent(props) {
               onChange={text => setData({...data, end: text.target.value})}
             />
           </View>
+
+          <View style={styles.wholeContainer}>
+            <Text>Time</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Time resolution"
+              onChange={text => setData({...data, time_resolution: text.target.value})}
+            />
+          </View>
+
           <Button
             title="Show Data"
             onPress={() => {
