@@ -1,7 +1,8 @@
 import React, { useContext, useState } from 'react';
-import { Button, StyleSheet, Text, View } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native'
-import './app.css'
+import { Button, StyleSheet, Text, View, Dimensions } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { LineChart } from 'react-native-chart-kit';
+import './app.css';
 import {
   createDrawerNavigator,
   DrawerContentScrollView,
@@ -14,10 +15,44 @@ import useApi from './hooks/useApi';
 function Feed() {
   const { data } = useContext(DataContext);
   const apiData = useApi(data);
+  const finalData = Object.values(apiData.data);
+  const screenWidth = Dimensions.get("window").width;
+  const chartData = {
+    labels: [ '2014', '2015', '2016', '2017', '2018' ],
+    datasets: [
+      {
+        data: finalData,
+        color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`, // optional
+        strokeWidth: 2 // optional
+      }
+    ],
+    legend: ["Rainy Days"] // optional
+  };
 
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Text>a</Text>
+      <LineChart
+      data={chartData}
+        width={screenWidth}
+        height={220}
+        chartConfig={{
+          backgroundColor: "#FFFFFF",
+          backgroundGradientFrom: "#27CE2E",
+          backgroundGradientTo: "#06A40D",
+          decimalPlaces: 2, // optional, defaults to 2dp
+          color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+          labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+          style: {
+            borderRadius: 16
+          },
+          propsForDots: {
+            r: "6",
+            strokeWidth: "2",
+            stroke: "#000000"
+          }
+        }}
+      />
       <Button title="Learn More"></Button>
     </View>
   );
