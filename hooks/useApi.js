@@ -10,7 +10,7 @@ const useApi = ({
   end,
   time_resolution,
 }) => {
-  const [response, setResponse] = useState({ data: '', status: 100 });
+  const [response, setResponse] = useState({ data: {labels: [], values: []}, status: 100 });
 
   useEffect(() => {
     if (longitude, latitude, start, end) {

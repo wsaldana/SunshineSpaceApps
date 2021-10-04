@@ -15,10 +15,10 @@ import useApi from './hooks/useApi';
 function Feed() {
   const { data } = useContext(DataContext);
   const apiData = useApi(data);
-  const finalData = Object.values(apiData.data);
+  const finalData = Object.values(apiData.data.values);
   const screenWidth = Dimensions.get("window").width;
   const chartData = {
-    labels: [ '2014', '2015', '2016', '2017', '2018' ],
+    labels: apiData.data.labels,
     datasets: [
       {
         data: finalData,
@@ -26,12 +26,11 @@ function Feed() {
         strokeWidth: 2 // optional
       }
     ],
-    legend: ["Rainy Days"] // optional
+    legend: ["Average Available Sunshine "] // optional
   };
 
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>a</Text>
       <LineChart
       data={chartData}
         width={screenWidth}

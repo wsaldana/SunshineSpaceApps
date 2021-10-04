@@ -6,8 +6,9 @@ const ProviderDataContext = ({ children }) => {
   const [data, setData] = useState({
     latitude: 90,
     longitude: 14.36,
-    start: 20150101,
-    end: 20150305,
+    start: 20140101,
+    end: 20170305,
+    time_resolution: "YEAR",
   })
   return (
     <DataContext.Provider value={{
